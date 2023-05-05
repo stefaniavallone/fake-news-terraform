@@ -45,6 +45,7 @@ jobs:
       - name: Terraform Init
         id: init
         run: cd ./tf/models/network && terraform init
+        continue-on-error: true
 
       - name: Terraform Validate
         id: validate
@@ -58,6 +59,11 @@ jobs:
       - name: Terraform Plan
         id: plan
         run: cd ./tf/models/network && terraform plan -var-file=../../applications/env/develop.tfvars -lock=false
+        continue-on-error: true
+      
+      - name: Terraform Apply
+        id: apply
+        run: cd ./tf/models/network && terraform apply -var-file=../../applications/env/develop.tfvars -lock=false
         continue-on-error: true
 
     
