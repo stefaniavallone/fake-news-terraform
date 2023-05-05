@@ -52,7 +52,7 @@ jobs:
       
       - name: Terraform Plan
         id: plan
-        run: cd ./tf/models/network && terraform plan -var-file=./tf/applications/env/develop.tfvars -lock=false
+        run: cd ./tf/models/network && terraform plan -var-file=../../applications/env/develop.tfvars -lock=false
         continue-on-error: true
 
     
