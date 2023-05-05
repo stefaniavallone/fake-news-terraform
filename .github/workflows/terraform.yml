@@ -63,7 +63,7 @@ jobs:
       
       - name: Terraform Apply
         id: apply
-        run: cd ./tf/models/network && terraform apply -var-file=../../applications/env/develop.tfvars -lock=false
+        run: cd ./tf/models/network && terraform apply -auto-approve -input=false -var-file=../../applications/env/develop.tfvars -lock=false
         continue-on-error: true
 
     
