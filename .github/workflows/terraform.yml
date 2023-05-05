@@ -47,7 +47,7 @@ jobs:
       
       - name: Terraform Plan
         id: plan
-        run: terraform plan -var-file=./tf/models/network/develop.tfvars -lock=false
+        run: terraform plan -var-file=../../applications/env/develop.tfvars -lock=false
         continue-on-error: true
 
     
