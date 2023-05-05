@@ -47,7 +47,7 @@ jobs:
       
       - name: Terraform test
         id: test
-        run: ls -lart
+        run: cd ./tf/models/network && ls -lart
         continue-on-error: true
       
       - name: Terraform Plan
