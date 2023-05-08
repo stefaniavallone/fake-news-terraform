@@ -5,23 +5,17 @@ terraform {
   }
 }
 
-# Create Resource Group
-resource "azurerm_resource_group" "fake_news_resource_group_test" {
-  name     = var.fake_news_resource_group_name
-  location = var.location
-}
-
 resource "azurerm_application_insights" "fake_news_insights" {
   name                = var.fake_news_insights_name
   location            = azurerm_resource_group.fake_news_resource_group_test.location
-  resource_group_name = azurerm_resource_group.fake_news_resource_group_test.name
+  resource_group_name = fake_news_resource
   application_type    = "web"
 }
 
 resource "azurerm_key_vault" "fake_news_key_vault" {
   name                = var.fake_news_key_vault_name
   location            = azurerm_resource_group.fake_news_resource_group_test.location
-  resource_group_name = azurerm_resource_group.fake_news_resource_group_test.name
+  resource_group_name = fake_news_resource
   tenant_id           = data.azurerm_client_config.current.tenant_id
   sku_name            = "premium"
 }
@@ -29,7 +23,7 @@ resource "azurerm_key_vault" "fake_news_key_vault" {
 resource "azurerm_storage_account" "fake_news_storage" {
   name                     = var.fake_news_storage_name
   location                 = azurerm_resource_group.fake_news_resource_group_test.location
-  resource_group_name      = azurerm_resource_group.fake_news_resource_group_test.name
+  resource_group_name      = fake_news_resource
   account_tier             = "Standard"
   account_replication_type = "GRS"
 }
@@ -37,7 +31,7 @@ resource "azurerm_storage_account" "fake_news_storage" {
 resource "azurerm_machine_learning_workspace" "fake_news_machine_learning" {
   name                          = var.fake_news_machine_learning_name
   location                      = azurerm_resource_group.fake_news_resource_group_test.location
-  resource_group_name           = azurerm_resource_group.fake_news_resource_group_test.name
+  resource_group_name           = fake_news_resource
   application_insights_id       = azurerm_application_insights.fake_news_insights.id
   key_vault_id                  = azurerm_key_vault.fake_news_key_vault.id
   storage_account_id            = azurerm_storage_account.fake_news_storage.id
@@ -51,12 +45,12 @@ resource "azurerm_virtual_network" "fake_news_network" {
   name                = var.fake_news_network_name
   address_space       = ["10.1.0.0/16"]
   location            = azurerm_resource_group.fake_news_resource_group_test.location
-  resource_group_name = azurerm_resource_group.fake_news_resource_group_test.name
+  resource_group_name = fake_news_resource
 }
 
 resource "azurerm_subnet" "fake_news_subnet" {
   name                 = var.fake_news_subnet_name
-  resource_group_name  = azurerm_resource_group.fake_news_resource_group_test.name
+  resource_group_name  = fake_news_resource
   virtual_network_name = azurerm_virtual_network.fake_news_network.name
   address_prefixes     = ["10.1.0.0/24"]
 }
