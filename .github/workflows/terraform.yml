@@ -10,7 +10,9 @@ defaults:
     working-directory: ./tf/models/network
     
 permissions:
+  id-token: write
   contents: read
+  pull-requests: write
 
 jobs:
   terraform:
