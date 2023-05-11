@@ -46,21 +46,21 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: cd ./tf/models/network && terraform init
+        run: cd ./tf/models/development && terraform init
         continue-on-error: true
 
       - name: Terraform Validate
         id: validate
-        run: cd ./tf/models/network && terraform validate
+        run: cd ./tf/models/network/development && terraform validate
       
       - name: Terraform Plan
         id: plan
-        run: cd ./tf/models/network && terraform plan -var-file=../../applications/env/develop.tfvars -lock=false
+        run: cd ./tf/models/network/development && terraform plan -var-file=./develop.tfvars -lock=false
         continue-on-error: true
       
       - name: Terraform Apply
         id: apply
-        run: cd ./tf/models/network && terraform apply -auto-approve -input=false -var-file=../../applications/env/develop.tfvars -lock=false
+        run: cd ./tf/models/network/development && terraform apply -auto-approve -input=false -var-file=./develop.tfvars -lock=false
         continue-on-error: true
       
       - name: Azure CLI script
