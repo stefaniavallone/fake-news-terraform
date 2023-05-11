@@ -11,6 +11,7 @@ resource "azurerm_resource_group" "fake_news_resource_group" {
   location = var.location
 }
 
+# Create Application Insights
 resource "azurerm_application_insights" "fake_news_insights" {
   name                = var.fake_news_insights_name
   location            = azurerm_resource_group.fake_news_resource_group.location
@@ -18,6 +19,7 @@ resource "azurerm_application_insights" "fake_news_insights" {
   application_type    = "web"
 }
 
+# Create Key Vault
 resource "azurerm_key_vault" "fake_news_key_vault" {
   name                = var.fake_news_key_vault_name
   location            = azurerm_resource_group.fake_news_resource_group.location
@@ -26,6 +28,7 @@ resource "azurerm_key_vault" "fake_news_key_vault" {
   sku_name            = "premium"
 }
 
+# Create Storage Account
 resource "azurerm_storage_account" "fake_news_storage" {
   name                     = var.fake_news_storage_name
   location                 = azurerm_resource_group.fake_news_resource_group.location
@@ -34,6 +37,7 @@ resource "azurerm_storage_account" "fake_news_storage" {
   account_replication_type = "GRS"
 }
 
+# Create Machine Learning Workspace
 resource "azurerm_machine_learning_workspace" "fake_news_machine_learning" {
   name                          = var.fake_news_machine_learning_name
   location                      = azurerm_resource_group.fake_news_resource_group.location
@@ -47,6 +51,7 @@ resource "azurerm_machine_learning_workspace" "fake_news_machine_learning" {
   }
 } 
 
+# Create Virtual Network
 resource "azurerm_virtual_network" "fake_news_network" {
   name                = var.fake_news_network_name
   address_space       = ["10.1.0.0/16"]
@@ -54,6 +59,7 @@ resource "azurerm_virtual_network" "fake_news_network" {
   resource_group_name = azurerm_resource_group.fake_news_resource_group.name
 }
 
+# Create Subnet
 resource "azurerm_subnet" "fake_news_subnet" {
   name                 = var.fake_news_subnet_name
   resource_group_name  = azurerm_resource_group.fake_news_resource_group.name
@@ -61,8 +67,7 @@ resource "azurerm_subnet" "fake_news_subnet" {
   address_prefixes     = ["10.1.0.0/24"]
 }
 
-
-
+# Create Machine Learning Compute Instance
 resource "azurerm_machine_learning_compute_instance" "fake_news_machine_learning_compute_instance" {
   name                          = var.fake_news_machine_learning_compute_instance_name
   location                      = azurerm_resource_group.fake_news_resource_group.location
