@@ -1,4 +1,4 @@
-fake_news_resource_group_name =  "fake_news_resource_test"
+fake_news_resource_group_name =  "fake_news_resource"
 fake_news_storage_name = "fakenewsstorageaccount"
 fake_news_virtual_machine_name = "fake_news_virtual_machine"
 fake_news_subnet_name = "fake_news_subnet"
